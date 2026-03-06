@@ -2,98 +2,56 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de IVA Pro</title>
+    <title>Calculadora de IVA - Fix</title>
     <style>
-        /* CSS: Diseño y Estilo */
-        :root {
-            --primary: #4f46e5;
-            --bg: #f8fafc;
-            --card: #ffffff;
-            --text: #1e293b;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .calculator-card {
-            background: var(--card);
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 400px;
-        }
-
-        h2 { text-align: center; color: var(--primary); margin-bottom: 1.5rem; }
-
-        .form-group { margin-bottom: 1.2rem; }
-
-        label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
-
-        input, select {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #cbd5e1;
-            border-radius: 0.5rem;
-            box-sizing: border-box; /* Evita que el padding desborde el ancho */
-            font-size: 1rem;
-        }
-
-        .results {
-            margin-top: 1.5rem;
-            padding-top: 1rem;
-            border-top: 2px dashed #e2e8f0;
-        }
-
-        .result-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .total {
-            font-weight: bold;
-            color: var(--primary);
-            font-size: 1.3rem;
-        }
+        body { font-family: sans-serif; display: flex; justify-content: center; padding: 50px; background: #eee; }
+        .card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 300px; }
+        input, select { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .res { margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px; }
+        .total { font-weight: bold; color: #2563eb; font-size: 1.2rem; }
     </style>
 </head>
 <body>
 
-<div class="calculator-card">
-    <h2>Calculadora de IVA</h2>
+<div class="card">
+    <h3>Calculadora de IVA</h3>
+    <label>Monto Base:</label>
+    <input type="number" id="montoInput" placeholder="0.00">
     
-    <div class="form-group">
-        <label for="monto">Monto Base ($)</label>
-        <input type="number" id="monto" placeholder="Ej: 1000" oninput="calcular()">
-    </div>
+    <label>IVA (%):</label>
+    <input type="number" id="ivaInput" value="16">
 
-    <div class="form-group">
-        <label for="iva">Porcentaje de IVA (%)</label>
-        <select id="iva" onchange="calcular()">
-            <option value="16">16% (General MX)</option>
-            <option value="21">21% (General ES)</option>
-            <option value="10">10% (Reducido)</option>
-            <option value="8">8% (Frontera)</option>
-            <option value="0">0% (Exento)</option>
-        </select>
+    <div class="res">
+        <p>IVA: <span id="displayIva">$0.00</span></p>
+        <p class="total">Total: <span id="displayTotal">$0.00</span></p>
     </div>
+</div>
 
-    <div class="results">
-        <div class="result-item">
-            <span>Monto Base:</span>
-            <span id="res-base">$0.00</span>
-        </div>
-        <div class="result-item">
-            <span>IVA Calculado:</span>
-            <span id="res-iva
+<script>
+    // Seleccionamos los elementos del DOM
+    const inputMonto = document.getElementById('montoInput');
+    const inputIva = document.getElementById('ivaInput');
+    const displayIva = document.getElementById('displayIva');
+    const displayTotal = document.getElementById('displayTotal');
+
+    // Función principal de cálculo
+    const actualizarCalculos = () => {
+        const monto = parseFloat(inputMonto.value) || 0;
+        const porcentaje = parseFloat(inputIva.value) || 0;
+
+        const calculoIva = monto * (porcentaje / 100);
+        const calculoTotal = monto + calculoIva;
+
+        // Inyectamos el texto en el HTML
+        displayIva.innerText = `$${calculoIva.toFixed(2)}`;
+        displayTotal.innerText = `$${calculoTotal.toFixed(2)}`;
+    };
+
+    // Escuchamos el evento 'input' en ambos campos
+    // Esto detecta: escribir, borrar, pegar o usar las flechitas del input
+    inputMonto.addEventListener('input', actualizarCalculos);
+    inputIva.addEventListener('input', actualizarCalculos);
+</script>
+
+</body>
+</html>
