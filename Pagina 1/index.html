@@ -1,11 +1,99 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-<title>Mi primera web</title>
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de IVA Pro</title>
+    <style>
+        /* CSS: Diseño y Estilo */
+        :root {
+            --primary: #4f46e5;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+        }
 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator-card {
+            background: var(--card);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 { text-align: center; color: var(--primary); margin-bottom: 1.5rem; }
+
+        .form-group { margin-bottom: 1.2rem; }
+
+        label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.5rem;
+            box-sizing: border-box; /* Evita que el padding desborde el ancho */
+            font-size: 1rem;
+        }
+
+        .results {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 2px dashed #e2e8f0;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .total {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+    </style>
+</head>
 <body>
-<h1>Hola internet</h1>
-<p>hello.</p>
-</body>
-</html>
+
+<div class="calculator-card">
+    <h2>Calculadora de IVA</h2>
+    
+    <div class="form-group">
+        <label for="monto">Monto Base ($)</label>
+        <input type="number" id="monto" placeholder="Ej: 1000" oninput="calcular()">
+    </div>
+
+    <div class="form-group">
+        <label for="iva">Porcentaje de IVA (%)</label>
+        <select id="iva" onchange="calcular()">
+            <option value="16">16% (General MX)</option>
+            <option value="21">21% (General ES)</option>
+            <option value="10">10% (Reducido)</option>
+            <option value="8">8% (Frontera)</option>
+            <option value="0">0% (Exento)</option>
+        </select>
+    </div>
+
+    <div class="results">
+        <div class="result-item">
+            <span>Monto Base:</span>
+            <span id="res-base">$0.00</span>
+        </div>
+        <div class="result-item">
+            <span>IVA Calculado:</span>
+            <span id="res-iva
