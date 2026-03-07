@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de IVA online gratuita. Calcula el Impuesto al Valor Agregado de forma rápida y desglosa precios para México, España y más.">
+    <title>Calculadora de IVA Profesional 2026 | Rápida y Automática</title>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Calculadora de IVA Profesional",
+      "operatingSystem": "All",
+      "applicationCategory": "FinanceApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0"
+      },
+      "featureList": "Cálculo de IVA automático, tabla de tasas internacionales, desglose de montos."
+    }
+    </script>
+
+    <style>
+        :root { --primary: #2563eb; --dark: #2c3e50; --bg: #f4f7f6;
+        
+        }
+        body { font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; background: var(--bg); margin: 0; color: #333; }
+        
+        /* Calculadora */
+        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); width: 100%; max-width: 380px; margin-bottom: 30px; }
+        h1, h2, h3 { color: var(--dark); text-align: center; }
+        label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; }
+        input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 1rem; }
+        
+        .res { margin-top: 15px; border-top: 2px solid var(--bg); padding-top: 15px; text-align: center; }
+        .total-box { font-weight: bold; color: var(--primary); font-size: 1.5rem; margin: 10px 0; }
+
+        /* Tabla Interactiva */
+        .tabla-iva { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; }
+        .tabla-iva th, .tabla-iva td { padding: 10px; border-bottom: 1px solid #eee; text-align: left; }
+        .btn-aplicar { background: var(--primary); color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; transition: 0.3s; }
+        .btn-aplicar:hover { background: #1d4ed8; }
+
+        /* Contenido SEO y FAQ */
+        .container-seo { max-width: 800px; width: 100%; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .faq-item { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .faq-item h3 { text-align: left; font-size: 1.1rem; color: var(--primary); }
+        code { background: #f0f0f0; padding: 2px 5px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Calculadora de IVA</h1>
+        
+        <label for="montoInput">Monto Base ($)</label>
+        <input type="number" id="montoInput" placeholder="0.00" step="0.01" aria-label="Monto base a calcular">
+        
+        <label for="ivaInput">Tasa de IVA (%)</label>
+        <input type="number" id="ivaInput" value="16" aria-label="Porcentaje de IVA">
+
+        <div class="res">
+            <p>Impuesto IVA: <span id="displayIva">$0.00</span></p>
+            <div class="total-box">Total: <span id="displayTotal">$0.00</span></div>
+        </div>
+
+        <hr style="border:0; border-top:1px solid #eee; margin:20px 0;">
+
+        <h3>Tasas de Referencia</h3>
+        <table class="tabla-iva">
+            <thead>
+                <tr>
+                    <th>Región</th>
+                    <th>IVA</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>México (General)</td><td>16%</td><td><button class="btn-aplicar" onclick="aplicarIva(16)">Usar</button></td></tr>
+                <tr><td>México (Frontera)</td><td>8%</td><td><button class="btn-aplicar" onclick="aplicarIva(8)">Usar</button></td></tr>
+                <tr><td>España (General)</td><td>21%</td><td><button class="btn-aplicar" onclick="aplicarIva(21)">Usar</button></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <section class="container-seo">
+        <h2>Guía Completa: Cómo calcular el IVA en 2026</h2>
+        <p>El IVA es un impuesto indirecto sobre el consumo. Entender su cálculo es vital para la contabilidad personal y empresarial.</p>
+        
+        
+
+        <div class="faq-item">
+            <h3>¿Cuál es la fórmula del IVA?</h3>
+            <p>Para sumar el IVA a un precio base, la fórmula es: <code>Monto × (1 + Tasa/100)</code>. Por ejemplo, si el monto es $100 y el IVA es 16%, el total es $116.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>¿Cómo desglosar el IVA de un precio total?</h3>
+            <p>Si ya tienes el precio final y quieres saber cuánto fue de IVA, divide el total entre <code>1 + (Tasa/100)</code>. El resultado será el monto base.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Diferencia entre IVA trasladado e IVA acreditable</h3>
+            <p>El <strong>trasladado</strong> es el que cobras a tus clientes, mientras que el <strong>acreditable</strong> es el que pagas a tus proveedores. La diferencia es lo que declaras ante el fisco.</p>
+        </div>
+    </section>
+
+    <script>
+        const inputMonto = document.getElementById('montoInput');
+        const inputIva = document.getElementById('ivaInput');
+        const displayIva = document.getElementById('displayIva');
+        const displayTotal = document.getElementById('displayTotal');
+
+        const actualizarCalculos = () => {
+            const monto = parseFloat(inputMonto.value) || 0;
+            const porcentaje = parseFloat(inputIva.value) || 0;
+
+            const calculoIva = monto * (porcentaje / 100);
+            const calculoTotal = monto + calculoIva;
+
+            const format = (num) => num.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+
+            displayIva.innerText = `$${format(calculoIva)}`;
+            displayTotal.innerText = `$${format(calculoTotal)}`;
+        };
+
+        function aplicarIva(valor) {
+            inputIva.value = valor;
+            actualizarCalculos();
+        }
+
+        inputMonto.addEventListener('input', actualizarCalculos);
+        inputIva.addEventListener('input', actualizarCalculos);
+    </script>
+</body>
+</html>
